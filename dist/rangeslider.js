@@ -1,4 +1,4 @@
-/*! rangeslider.js - v2.3.0 | (c) 2016 @andreruffert | MIT license | https://github.com/andreruffert/rangeslider.js */
+/*! rangeslider.js - v2.3.1 | (c) 2016 @andreruffert | MIT license | https://github.com/andreruffert/rangeslider.js */
 (function(factory) {
     'use strict';
 
@@ -277,7 +277,7 @@
 
             var value = e.target.value,
                 pos = _this.getPositionFromValue(value);
-            _this.setPosition(pos);
+            _this.setPosition(pos, undefined, value);
         });
     }
 
@@ -312,7 +312,7 @@
             this.$range.removeClass(this.options.disabledClass);
         }
 
-        this.setPosition(this.position, triggerSlide);
+        this.setPosition(this.position, triggerSlide, this.value);
     };
 
     Plugin.prototype.handleDown = function(e) {
@@ -377,7 +377,9 @@
         }
 
         // Snapping steps
-        value = this.getValueFromPosition(this.cap(pos, 0, this.maxHandlePos));
+        if (value === undefined) {
+            value = this.getValueFromPosition(this.cap(pos, 0, this.maxHandlePos));
+        }
         newPos = this.getPositionFromValue(value);
 
         // Update ui
