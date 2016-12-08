@@ -223,6 +223,7 @@
         this.onInit             = this.options.onInit;
         this.onSlide            = this.options.onSlide;
         this.onSlideEnd         = this.options.onSlideEnd;
+        this.onActive           = this.options.onActive;
         this.DIMENSION          = constants.orientation[this.orientation].dimension;
         this.DIRECTION          = constants.orientation[this.orientation].direction;
         this.DIRECTION_STYLE    = constants.orientation[this.orientation].directionStyle;
@@ -322,6 +323,9 @@
         // add active class because Firefox is ignoring
         // the handle:active pseudo selector because of `e.preventDefault();`
         this.$range.addClass(this.options.activeClass);
+        if (this.onActive && typeof this.onActive === 'function') {
+            this.onActive(true);
+        }
 
         // If we click on the handle don't set the new position
         if ((' ' + e.target.className + ' ').replace(/[\n\t]/g, ' ').indexOf(this.options.handleClass) > -1) {
@@ -353,6 +357,9 @@
         this.$document.off(this.endEvent, this.handleEnd);
 
         this.$range.removeClass(this.options.activeClass);
+        if (this.onActive && typeof this.onActive === 'function') {
+            this.onActive(false);
+        }
 
         // Ok we're done fire the change event
         this.$element.trigger('change', { origin: this.identifier });
