@@ -276,7 +276,7 @@
 
             var value = e.target.value,
                 pos = _this.getPositionFromValue(value);
-            _this.setPosition(pos);
+            _this.setPosition(pos, undefined, value);
         });
     }
 
@@ -311,7 +311,7 @@
             this.$range.removeClass(this.options.disabledClass);
         }
 
-        this.setPosition(this.position, triggerSlide);
+        this.setPosition(this.position, triggerSlide, this.value);
     };
 
     Plugin.prototype.handleDown = function(e) {
@@ -376,7 +376,9 @@
         }
 
         // Snapping steps
-        value = this.getValueFromPosition(this.cap(pos, 0, this.maxHandlePos));
+        if (value === undefined) {
+            value = this.getValueFromPosition(this.cap(pos, 0, this.maxHandlePos));
+        }
         newPos = this.getPositionFromValue(value);
 
         // Update ui
