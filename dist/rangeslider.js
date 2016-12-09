@@ -1,4 +1,4 @@
-/*! rangeslider.js - v2.3.2 | (c) 2016 @andreruffert | MIT license | https://github.com/andreruffert/rangeslider.js */
+/*! rangeslider.js - v2.3.3 | (c) 2016 @andreruffert | MIT license | https://github.com/andreruffert/rangeslider.js */
 (function(factory) {
     'use strict';
 
@@ -376,8 +376,8 @@
         return pos;
     };
 
-    Plugin.prototype.setPosition = function(pos, triggerSlide) {
-        var value, newPos;
+    Plugin.prototype.setPosition = function(pos, triggerSlide, value) {
+        var newPos;
 
         if (triggerSlide === undefined) {
             triggerSlide = true;
@@ -399,7 +399,7 @@
         this.value = value;
 
         if (triggerSlide && this.onSlide && typeof this.onSlide === 'function') {
-            this.onSlide(newPos, value);
+            this.onSlide(newPos, value, pos);
         }
     };
 
