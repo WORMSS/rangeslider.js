@@ -375,8 +375,8 @@
         return pos;
     };
 
-    Plugin.prototype.setPosition = function(pos, triggerSlide) {
-        var value, newPos;
+    Plugin.prototype.setPosition = function(pos, triggerSlide, value) {
+        var newPos;
 
         if (triggerSlide === undefined) {
             triggerSlide = true;
@@ -398,7 +398,7 @@
         this.value = value;
 
         if (triggerSlide && this.onSlide && typeof this.onSlide === 'function') {
-            this.onSlide(newPos, value);
+            this.onSlide(newPos, value, pos);
         }
     };
 
